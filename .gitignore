@@ -1,0 +1,21 @@
+# Entorno virtual
+venv/
+.venv/
+
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de configuración de IDEs (ejemplos)
+.vscode/
+.idea/
+
+# Archivos de dependencia (si usas gestores como pipenv/poetry)
+# Pipfile.lock
+# poetry.lock
+
+# Archivos temporales o logs locales
+*.log
+.DS_Store
