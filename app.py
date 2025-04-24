@@ -130,7 +130,7 @@ with col_izq:
     # --- Panel Pedidos Pendientes ---
     st.subheader("📦 Pedidos de Fabricación Pendientes")
     # Filtrar solo los pedidos con estado 'pendiente'
-    pending_orders = [o for o in sim.production_orders if o.status == ProductionStatus.PENDIENTE]
+    pending_orders = [o for o in sim.production_orders if o.status == "pendiente"]
 
     if not pending_orders:
         st.info("No hay pedidos de fabricación pendientes.")
@@ -173,7 +173,8 @@ with col_izq:
     st.divider()
      # --- Panel Pedidos Liberados/En Progreso --- (Añadido para más visibilidad)
     st.subheader("🏭 Pedidos en Cola / Producción")
-    active_orders = [o for o in sim.production_orders if o.status in [ProductionStatus.LIBERADO, ProductionStatus.EN_PROGRESO]]
+            # Filtrar comparando con las cadenas directamente
+    active_orders = [o for o in sim.production_orders if o.status in ["liberado", "en_progreso"]]
     if not active_orders:
         st.info("No hay pedidos liberados o en producción.")
     else:
