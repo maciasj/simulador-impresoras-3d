@@ -39,10 +39,25 @@ def load_initial_config(filepath: str) -> Dict:
     # Cargar productos
     for prod_data in config_data.get("products", []):
         bom_items = None
-        if "bom" in prod_data and prod_data["bom"] is not None:
-            bom_items = [BOMItem(**item) for item in prod_data["bom"]]
-        initial_state["products"].append(Product(bom=bom_items, **prod_data))
+        # Extraer el BOM del diccionario original ANTES de usar **prod_data
+        raw_bom_data = prod_data.pop("bom", None) # Usa pop para extraer y eliminar 'bom'
 
+        if raw_bom_data is not None and prod_data.get("type") == "finished": # Asegúrate que solo procesamos BOM para 'finished'
+            try:
+                bom_items = [BOMItem(**item) for item in raw_bom_data]
+            except Exception as e: # Captura errores si el formato del BOM es incorrecto
+                    print(f"Error processing BOM for product data: {prod_data.get('name', 'N/A')}: {e}")
+                    # Decide qué hacer: continuar sin BOM, registrar error, etc.
+                    # Por ahora, continuamos sin BOM para este producto si falla
+                    bom_items = None
+
+        try:
+                # Ahora pasamos el 'bom' procesado explícitamente y el resto con **
+                product_instance = Product(bom=bom_items, **prod_data)
+                initial_state["products"].append(product_instance)
+        except Exception as e: # Captura errores de validación de Pydantic
+                print(f"Error creating Product instance for data: {prod_data.get('name', 'N/A')}: {e}")
+                # Decide si quieres detener la carga o solo saltar este producto
     # Cargar proveedores
     for supp_data in config_data.get("suppliers", []):
          # Convertimos las keys del supply_details a int porque JSON las trata como string
