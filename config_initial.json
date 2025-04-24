@@ -1,79 +1,79 @@
 {
-    "simulation_parameters": {
-      "random_seed": 42, // Para reproducibilidad si usas generación aleatoria
-      "demand_mean": 5,  // Media de unidades pedidas por tipo de producto al día
-      "demand_variance": 2 // Varianza de unidades pedidas
+  "simulation_parameters": {
+    "random_seed": 42, 
+    "demand_mean": 5,  
+    "demand_variance": 2
+},
+  "production_capacity_per_day": 10,
+  "products": [
+    
+    {"id": 101, "name": "kit_piezas", "type": "raw"},
+    {"id": 102, "name": "pcb_CTRL-V2", "type": "raw"},
+    {"id": 103, "name": "pcb_CTRL-V3", "type": "raw"},
+    {"id": 104, "name": "extrusor", "type": "raw"},
+    {"id": 105, "name": "cables_conexion", "type": "raw"},
+    {"id": 106, "name": "transformador_24v", "type": "raw"},
+    {"id": 107, "name": "enchufe_schuko", "type": "raw"},
+    {"id": 108, "name": "sensor_autonivel", "type": "raw"},
+    
+    {
+      "id": 1, "name": "P3D-Classic", "type": "finished",
+      "bom": [
+        {"material_id": 101, "quantity": 1},
+        {"material_id": 102, "quantity": 1},
+        {"material_id": 104, "quantity": 1},
+        {"material_id": 105, "quantity": 2},
+        {"material_id": 106, "quantity": 1},
+        {"material_id": 107, "quantity": 1}
+      ]
     },
-    "production_capacity_per_day": 10,
-    "products": [
-      // Materias Primas
-      {"id": 101, "name": "kit_piezas", "type": "raw"},
-      {"id": 102, "name": "pcb_CTRL-V2", "type": "raw"},
-      {"id": 103, "name": "pcb_CTRL-V3", "type": "raw"},
-      {"id": 104, "name": "extrusor", "type": "raw"},
-      {"id": 105, "name": "cables_conexion", "type": "raw"},
-      {"id": 106, "name": "transformador_24v", "type": "raw"},
-      {"id": 107, "name": "enchufe_schuko", "type": "raw"},
-      {"id": 108, "name": "sensor_autonivel", "type": "raw"},
-      // Productos Terminados
-      {
-        "id": 1, "name": "P3D-Classic", "type": "finished",
-        "bom": [
-          {"material_id": 101, "quantity": 1},
-          {"material_id": 102, "quantity": 1},
-          {"material_id": 104, "quantity": 1},
-          {"material_id": 105, "quantity": 2},
-          {"material_id": 106, "quantity": 1},
-          {"material_id": 107, "quantity": 1}
-        ]
-      },
-      {
-        "id": 2, "name": "P3D-Pro", "type": "finished",
-        "bom": [
-          {"material_id": 101, "quantity": 1},
-          {"material_id": 103, "quantity": 1},
-          {"material_id": 104, "quantity": 1},
-          {"material_id": 108, "quantity": 1},
-          {"material_id": 105, "quantity": 3},
-          {"material_id": 106, "quantity": 1},
-          {"material_id": 107, "quantity": 1}
-        ]
+    {
+      "id": 2, "name": "P3D-Pro", "type": "finished",
+      "bom": [
+        {"material_id": 101, "quantity": 1},
+        {"material_id": 103, "quantity": 1},
+        {"material_id": 104, "quantity": 1},
+        {"material_id": 108, "quantity": 1},
+        {"material_id": 105, "quantity": 3},
+        {"material_id": 106, "quantity": 1},
+        {"material_id": 107, "quantity": 1}
+      ]
+    }
+  ],
+  "suppliers": [
+    {
+      "id": 201, "name": "Proveedor Kits",
+      "supply_details": {
+        "101": [90.0, 3] 
       }
-    ],
-    "suppliers": [
-      {
-        "id": 201, "name": "Proveedor Kits",
-        "supply_details": {
-          "101": [90.0, 3] // Vende kit_piezas (ID 101) a 90€ con 3 días de lead time
-        }
-      },
-      {
-        "id": 202, "name": "Proveedor PCBs",
-        "supply_details": {
-          "102": [50.0, 5], // Vende pcb_CTRL-V2 (ID 102) a 50€ con 5 días
-          "103": [75.0, 5]  // Vende pcb_CTRL-V3 (ID 103) a 75€ con 5 días
-        }
-      },
-       {
-        "id": 203, "name": "Proveedor Componentes Varios",
-        "supply_details": {
-          "104": [30.0, 2], // extrusor
-          "105": [5.0, 1],  // cables
-          "106": [20.0, 4], // transformador
-          "107": [3.0, 1],  // enchufe
-          "108": [40.0, 7]  // sensor
-        }
+    },
+    {
+      "id": 202, "name": "Proveedor PCBs",
+      "supply_details": {
+        "102": [50.0, 5], 
+        "103": [75.0, 5] 
       }
-    ],
-    "initial_inventory": [
-      {"product_id": 101, "quantity": 30}, // 30 kits de piezas iniciales (como en el ejemplo)
-      {"product_id": 102, "quantity": 10},
-      {"product_id": 103, "quantity": 5},
-      {"product_id": 104, "quantity": 20},
-      {"product_id": 105, "quantity": 50},
-      {"product_id": 106, "quantity": 15},
-      {"product_id": 107, "quantity": 15},
-      {"product_id": 108, "quantity": 5}
-      // Sin productos terminados inicialmente
-    ]
-  }
+    },
+     {
+      "id": 203, "name": "Proveedor Componentes Varios",
+      "supply_details": {
+        "104": [30.0, 2], 
+        "105": [5.0, 1],  
+        "106": [20.0, 4], 
+        "107": [3.0, 1],  
+        "108": [40.0, 7]  
+      }
+    }
+  ],
+  "initial_inventory": [
+    {"product_id": 101, "quantity": 30}, 
+    {"product_id": 102, "quantity": 10},
+    {"product_id": 103, "quantity": 5},
+    {"product_id": 104, "quantity": 20},
+    {"product_id": 105, "quantity": 50},
+    {"product_id": 106, "quantity": 15},
+    {"product_id": 107, "quantity": 15},
+    {"product_id": 108, "quantity": 5}
+
+  ]
+}

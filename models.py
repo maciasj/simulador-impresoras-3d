@@ -1,5 +1,8 @@
 from pydantic import BaseModel, Field
 from typing import List, Dict, Literal, Optional
+# models.py
+from typing import Literal
+ProductType = Literal["raw", "finished"]
 
 # Tipos de productos (basado en Sección 5)
 ProductType = Literal["raw", "finished"]
@@ -69,3 +72,4 @@ class Event(BaseModel):
     type: str # Ej: "DEMANDA_GENERADA", "PRODUCCION_INICIADA", "COMPRA_RECIBIDA"
     sim_day: int # Día de la simulación en que ocurrió
     details: Dict # Un diccionario con detalles específicos del evento
+    
